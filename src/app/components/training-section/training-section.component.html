@@ -1,0 +1,44 @@
+
+<div  class="training-container">
+  <div class = "individual-training-container">
+  <h3 (click)="toggleDetails(training.id)" [class.highlighted]="showDetails">
+        <mat-icon>date_range</mat-icon>
+        {{ training?.trainingDate | date:'yyyy-MM-dd HH:mm' }}
+        
+    </h3>
+    <mat-icon class="delete-icon" (click) ="deleteTraining(training.id)">delete</mat-icon>
+
+    
+  </div>
+    <div *ngIf="showDetails" class="details-container">
+     
+      <h4 (click) = "openAddExerciseDialog(training.id)"><mat-icon>add_circle</mat-icon><strong>Dodaj ćwiczenie</strong></h4>
+    
+      <div *ngFor="let set of groupedSets | keyvalue">
+        <h2>{{ getExerciseName(set.key) }}</h2>
+        <h4 (click)="openAddSetDialog(training.id,set.key)">
+          <mat-icon>fitness_center</mat-icon>
+          <strong>Dodaj set</strong>
+        </h4>
+        <table class="set-table">
+          <thead>
+            <tr>
+              <th>Set</th>
+              <th>Repetitions</th>
+              <th>Weight</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let s of set.value; let i = index" class="set-item">
+              <td>{{ i + 1 }}</td>
+              <td>{{ s.repetitions }}</td>
+              <td>{{ s.weight }}</td>
+              <td (click) = "deleteSet(s.id)"><mat-icon>delete</mat-icon></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

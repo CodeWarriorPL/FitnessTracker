@@ -1,0 +1,31 @@
+body.dark {
+  background-color: #1a1a1a;
+  color: #fff;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #fff;
+  padding: 10px;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #00bcd4; /* Change the color for the hover effect */
+}
+
+/* Add styles for router-outlet if needed */
+router-outlet {
+  margin-top: 20px; /* Adjust as needed */
+}

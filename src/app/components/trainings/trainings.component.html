@@ -1,0 +1,26 @@
+<div class="addTrainingContainer">
+  <mat-form-field>
+    <mat-label>Wybierz templatkę</mat-label>
+    <mat-select (selectionChange)="selectTemplate()">
+      <mat-option value="option">Option</mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  <mat-form-field>
+    <mat-label>Wybierz datę</mat-label>
+    <input matInput [matDatepicker]="picker" (dateChange)="selectDate($event)">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  
+
+  <!-- Dodaj przycisk na prawo od form fieldów -->
+ <button mat-button class="custom-button" (click)="addTraining()" *ngIf="dateSelected && templateSelected">Dodaj trening</button>
+
+
+</div>
+
+<div>
+  <h3>Lista Treningów:</h3>
+  <app-training-section *ngFor="let training of trainings" [training]="training"></app-training-section>
+</div>

@@ -1,0 +1,55 @@
+<div class="register-container">
+  <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+    <h2>Register</h2>
+
+    <!-- Display alert for invalid email format -->
+    <div class="alert alert-danger" *ngIf="!isValidEmail(userData.email) && registerForm.submitted">
+      Please enter a valid email address.
+    </div>
+
+    <!-- Display alert for invalid password format -->
+    <div class="alert alert-danger" *ngIf="!isPasswordValid(userData.password) && registerForm.submitted">
+      Password must be at least 6 characters long and contain at least 1 digit.
+    </div>
+
+    <!-- Display alert for password and confirm password mismatch -->
+    <div class="alert alert-danger" *ngIf="userData.password !== userData.password && registerForm.submitted">
+      Passwords do not match. Please enter the same password in both fields.
+    </div>
+
+    <!-- Display alert for existing email -->
+    <div class="alert alert-danger" *ngIf="!isEmailUnique && registerForm.submitted">
+      This email is already in use. Please use a different email.
+    </div>
+
+    <div class="form-group">
+      <label for="email">
+        <i class="fa fa-envelope"></i> Email
+      </label>
+      <input type="email" id="email" name="email" [(ngModel)]="userData.email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="name">
+        <i class="fa fa-user"></i> Name
+      </label>
+      <input type="name" id="name" name="name" [(ngModel)]="userData.username" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">
+        <i class="fa fa-lock"></i> Password
+      </label>
+      <input type="password" id="password" name="password" [(ngModel)]="userData.password" required>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">
+        <i class="fa fa-lock"></i> Confirm Password
+      </label>
+      <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="userData.password" required>
+    </div>
+
+    <button type="submit" [disabled]="registerForm.invalid">Register</button>
+  </form>
+</div>

@@ -1,0 +1,27 @@
+<!-- Add this alert div at the beginning of your form -->
+
+  
+  <div class="login-container">
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+      <h2>Login</h2>
+      <div class="alert alert-danger" *ngIf="!loginError && loginForm.submitted">
+        Wrong email or password. Please try again.
+      </div>
+      <div class="form-group">
+        <label for="email">
+          <i class="fa fa-user"></i> Email
+        </label>
+        <input type="text" id="email" name="email" [(ngModel)]="userData.email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">
+          <i class="fa fa-lock"></i> Password
+        </label>
+        <input type="password" id="password" name="password" [(ngModel)]="userData.password" required>
+      </div>
+  
+      <button type="submit" [disabled]="loginForm.invalid">Login</button>
+      <p>Don't have an account? <a href="/register">Register here</a></p>
+    </form>
+  </div>
+  

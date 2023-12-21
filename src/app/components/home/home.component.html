@@ -1,0 +1,25 @@
+<div class="dark-theme">
+  <header>
+    <h1>Welcome {{ activeUser.username }}</h1>
+  </header>
+  <main>
+    <div class="description-space">
+    </div>
+    <section class="features">
+      <div class="feature" (click)="changeContent('Moje treningi')">
+        <ng-container *ngIf="selectedFeature === 'Moje treningi'; else otherContent">
+          <h2>Other content</h2>
+        </ng-container>
+        <ng-template #otherContent>
+          <h2>Moje treningi</h2>
+        </ng-template>
+      </div>
+      <div class="feature" (click)="changeContent('Dodaj trening')">
+        <h2>Dodaj trening</h2>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2023 My fitness journey All rights reserved.</p>
+  </footer>
+</div>
