@@ -10,10 +10,16 @@ nav li {
   cursor: pointer;
 }
 
+
 nav li:hover {
-  background-color: #f0f0f0; /* Change this to the desired highlight color */
+  background-color: #0575ed /* Change this to the desired highlight color */
 }
 nav{
   border-bottom: 2px solid #000000;
-  
+  background-color: #104b8a;
+  color: #ffffff;
+}
+a {
+  text-decoration: none; /* Usunięcie domyślnego podkreślenia */
+  color: #ffffff; /* Zmiana koloru tekstu na dowolny inny niż niebieski */
 }

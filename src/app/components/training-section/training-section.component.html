@@ -15,7 +15,7 @@
       <h4 (click) = "openAddExerciseDialog(training.id)"><mat-icon>add_circle</mat-icon><strong>Dodaj ćwiczenie</strong></h4>
     
       <div *ngFor="let set of groupedSets | keyvalue">
-        <h2>{{ getExerciseName(set.key) }}</h2>
+        <h1> <a routerLink="/progress-chart">{{ getExerciseName(set.key) }}</a> <mat-icon (click)="deleteExerciseSets(set.key,training.id)">delete</mat-icon></h1>
         <h4 (click)="openAddSetDialog(training.id,set.key)">
           <mat-icon>fitness_center</mat-icon>
           <strong>Dodaj set</strong>
@@ -26,17 +26,31 @@
               <th>Set</th>
               <th>Repetitions</th>
               <th>Weight</th>
-              <th></th>
+              <th>Edytuj</th>
+              <th>Usuń</th>
             </tr>
           </thead>
+          <!-- ... (your existing code) ... -->
+
           <tbody>
             <tr *ngFor="let s of set.value; let i = index" class="set-item">
               <td>{{ i + 1 }}</td>
-              <td>{{ s.repetitions }}</td>
-              <td>{{ s.weight }}</td>
-              <td (click) = "deleteSet(s.id)"><mat-icon>delete</mat-icon></td>
+              <td *ngIf="!s.isEditing">{{ s.repetitions }}</td>
+              <td *ngIf="!s.isEditing">{{ s.weight }}</td>
+              <td *ngIf="s.isEditing"><input type="text" [(ngModel)]="s.repetitions" /></td>
+              <td *ngIf="s.isEditing"><input type="text" [(ngModel)]="s.weight" /></td>
+              <td *ngIf="!s.isEditing">
+                <mat-icon (click)="toggleEdit(s)">edit</mat-icon>
+              </td>
+              <td *ngIf="s.isEditing">
+                <mat-icon (click)="saveEdit(s)">done</mat-icon>
+              </td>
+              <td (click)="deleteSet(s.id)"><mat-icon>delete</mat-icon></td>
             </tr>
           </tbody>
+
+<!-- ... (your existing code) ... -->
+
         </table>
       </div>
     </div>

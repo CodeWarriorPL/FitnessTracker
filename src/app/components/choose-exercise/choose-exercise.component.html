@@ -1,1 +1,26 @@
-<p>choose-exercise works!</p>
+<div class="page-container">
+    <h2>Choose an Exercise</h2>
+    <div>
+      <label for="bodyPart">Sort by Body Part:</label>
+      <select id="bodyPart" [(ngModel)]="selectedBodyPart" (change)="sortExercisesByBodyPart(selectedBodyPart)">
+        <option value="all">All</option>
+        <option *ngFor="let part of bodyParts" [value]="part">{{ part }}</option>
+      </select>
+    </div>
+    <div class="exercise-container">
+      <ul>
+        <li 
+          (click)="exerciseChosen(exercise)" 
+          *ngFor="let exercise of filteredExercises"
+          [class.selected]="exercise === selectedExercise"
+        >
+          {{ exercise.exerciseName }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="button-container">
+    <button *ngIf="selectedExercise && filteredExercises.length > 0" (click)="dialogRef.close(selectedExercise)">Add Exercise</button>
+    <button (click)="dialogRef.close()">Close</button>
+  </div>
+  

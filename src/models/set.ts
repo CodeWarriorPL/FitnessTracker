@@ -4,5 +4,6 @@ export class Set {
     repetitions? : number
     trainingId? : number
     exerciseId? : number
+    isEditing? : boolean
 }
 

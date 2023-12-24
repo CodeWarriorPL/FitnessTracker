@@ -16,7 +16,7 @@ export class AddSetComponent {
   constructor(
     public dialogRef: MatDialogRef<AddSetComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialog: MatDialog
+    
   ) {
 
   }

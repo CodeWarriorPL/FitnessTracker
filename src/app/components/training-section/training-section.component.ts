@@ -26,6 +26,7 @@ export class TrainingSectionComponent implements OnInit {
   trainingExist = true;
   showAddSetWindow = false;
   groupedSets: Map<number, any[]> = new Map<number, any[]>();
+  isEditing = false;
 
   constructor(private userService: UserService, private dialog: MatDialog,private trainingsComponent : TrainingsComponent) {}
 
@@ -89,12 +90,37 @@ export class TrainingSectionComponent implements OnInit {
     });
   }
   handleAddExerciseResult(result: any, trainingId: number) {
+    this.userService.createSet(trainingId, this.set, result.id).subscribe(
+      (data: any) => {
+        this.training.sets.push(data);
+        this.getAndGroupSets(trainingId);
+      },
+      (error) => {
+        console.error('Wystąpił błąd podczas dodawania serii:', error);
+      }
+    );
     
   }
 
   toggleDetails(trainingId: number) {
     this.showDetails = !this.showDetails;
     this.getAndGroupSets(trainingId);
+  }
+  toggleEdit(set : Set) {
+    set.isEditing = !set.isEditing;
+    
+  }
+  saveEdit(set : Set) {
+    set.isEditing = !set.isEditing;
+    console.log(set);
+    this.userService.updateSet(set).subscribe(
+      () => {
+        this.getAndGroupSets(this.training.id);
+      },
+      (error) => {
+        console.error('Wystąpił błąd podczas edycji serii:', error);
+      }
+    );
   }
 
   getExerciseName(exerciseId: number): string {
@@ -139,6 +165,17 @@ export class TrainingSectionComponent implements OnInit {
   deleteSet(setId : number) {
     console.log(setId);
     this.userService.deleteSet(setId).subscribe(
+      () => {
+        this.getAndGroupSets(this.training.id);
+      },
+      (error) => {
+        console.error('Wystąpił błąd podczas usuwania serii:', error);
+      }
+    );
+  }
+  deleteExerciseSets(exerciseId : number, trainingId : number) {
+    console.log(exerciseId);
+    this.userService.deleteSetsByExercise(exerciseId, trainingId).subscribe(
       () => {
         this.getAndGroupSets(this.training.id);
       },

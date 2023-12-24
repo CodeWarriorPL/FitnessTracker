@@ -24,6 +24,10 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { ChooseExerciseComponent } from './components/choose-exercise/choose-exercise.component';
+import { ProgressChartComponent } from './components/progress-chart/progress-chart.component';
+import { ChartModule } from 'angular-highcharts'
+import {NgxEchartsModule} from 'ngx-echarts';
+
 
 
 @NgModule({
@@ -37,6 +41,8 @@ import { ChooseExerciseComponent } from './components/choose-exercise/choose-exe
     TrainingSectionComponent,
     AddSetComponent,
     ChooseExerciseComponent,
+    ProgressChartComponent,
+    
     
     
   
@@ -54,7 +60,11 @@ import { ChooseExerciseComponent } from './components/choose-exercise/choose-exe
     MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    ChartModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
 
 
  

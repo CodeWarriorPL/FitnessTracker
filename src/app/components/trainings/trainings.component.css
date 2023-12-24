@@ -37,7 +37,13 @@ div {
 }
 .custom-button {
   
-  min-width: 150px; /* Dostosuj szerokość według potrzeb */
+  margin-top: -20px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 mat-form-field {
@@ -45,9 +51,6 @@ mat-form-field {
   min-width: 200px; /* Adjust as needed */
 }
 
-button {
-  margin-top: -20px;
-}
 
   
   ul {
@@ -65,17 +68,5 @@ button {
     background-color: #f9f9f9;
   }
   
-  /* Dodaj styl dla przycisku lub dowolnych innych elementów na stronie */
-  .button {
-    background-color: #4caf50;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .button:hover {
-    background-color: #45a049;
-  }
+
   

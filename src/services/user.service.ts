@@ -105,6 +105,9 @@ export class UserService {
   public deleteSet(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/set/${id}`);
   }
+  public deleteSetsByExercise(exerciseId: number, trainingId : number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/set/byExercise/${trainingId}/${exerciseId}`);
+  }
 
 
   //exercise functions

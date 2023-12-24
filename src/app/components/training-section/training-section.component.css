@@ -57,6 +57,11 @@ h4 {
 h4:hover {
   background-color: #ccc;
 }
+h1 {
+  color: #007bff;
+  display: flex;
+  align-items: center;
+}
 .training-container h3.highlighted {
   background-color: #ccc; 
   
