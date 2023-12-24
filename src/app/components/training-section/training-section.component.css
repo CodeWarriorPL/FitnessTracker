@@ -92,4 +92,8 @@ mat-icon:hover {
   h3:hover {
     background-color: #ccc;
   }
+  a {
+    text-decoration: none; /* Usunięcie domyślnego podkreślenia */
+   
+  }
   

@@ -15,7 +15,7 @@
       <h4 (click) = "openAddExerciseDialog(training.id)"><mat-icon>add_circle</mat-icon><strong>Dodaj ćwiczenie</strong></h4>
     
       <div *ngFor="let set of groupedSets | keyvalue">
-        <h1> <a routerLink="/progress-chart">{{ getExerciseName(set.key) }}</a> <mat-icon (click)="deleteExerciseSets(set.key,training.id)">delete</mat-icon></h1>
+        <h1> <a [routerLink]="['/progress-chart', set.key,getExerciseName(set.key)]">{{ getExerciseName(set.key) }}</a> <mat-icon (click)="deleteExerciseSets(set.key,training.id)">delete</mat-icon></h1>
         <h4 (click)="openAddSetDialog(training.id,set.key)">
           <mat-icon>fitness_center</mat-icon>
           <strong>Dodaj set</strong>

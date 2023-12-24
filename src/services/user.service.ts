@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { User } from '../models/user';
 import { Training } from '../models/training';  
 import { catchError, map, switchMap } from 'rxjs/operators'; // Import switchMap
+import { Set } from '../models/set';
 
 @Injectable({
   providedIn: 'root',
@@ -89,24 +90,27 @@ export class UserService {
   //set functions
 
 
-  public getSets(trainingId: number): Observable<Training[]> {
-    return this.http.get<Training[]>(`${this.apiUrl}/Set/${trainingId}`);
+  public getSets(trainingId: number): Observable<Set[]> {
+    return this.http.get<Set[]>(`${this.apiUrl}/Set/${trainingId}`);
   }
 
-  public getSetById(id: number): Observable<Training> {
-    return this.http.get<Training>(`${this.apiUrl}/set/byId/${id}`);
+  public getSetById(id: number): Observable<Set> {
+    return this.http.get<Set>(`${this.apiUrl}/set/byId/${id}`);
   }
-  public createSet(setId: number, newSet: Training,exercideId: number): Observable<Training> {
-    return this.http.post<Training>(`${this.apiUrl}/set/${setId}/${exercideId}`, newSet);
+  public createSet(setId: number, newSet: Training,exercideId: number): Observable<Set> {
+    return this.http.post<Set>(`${this.apiUrl}/set/${setId}/${exercideId}`, newSet);
   }
-  public updateSet(updatedSet: Training): Observable<Training> { 
-    return this.http.put<Training>(`${this.apiUrl}/set`, updatedSet);
+  public updateSet(updatedSet: Set): Observable<Set> { 
+    return this.http.put<Set>(`${this.apiUrl}/set`, updatedSet);
   }
   public deleteSet(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/set/${id}`);
   }
   public deleteSetsByExercise(exerciseId: number, trainingId : number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/set/byExercise/${trainingId}/${exerciseId}`);
+  }
+  public getUserSetsByExercise(userId : number, exerciseId : number) : Observable<Set[]> {
+    return this.http.get<Set[]>(`${this.apiUrl}/set/byExercise/${userId}/${exerciseId}`);
   }
 
 

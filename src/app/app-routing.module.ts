@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'progress-chart', component: ProgressChartComponent},
+  {path: 'progress-chart/:exerciseId/:exerciseName', component: ProgressChartComponent},
   {path: 'trainings', component: TrainingsComponent, canActivate: [AuthGuard]},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home', pathMatch: 'full' }
