@@ -97,7 +97,7 @@ export class UserService {
   public getSetById(id: number): Observable<Set> {
     return this.http.get<Set>(`${this.apiUrl}/set/byId/${id}`);
   }
-  public createSet(setId: number, newSet: Training,exercideId: number): Observable<Set> {
+  public createSet(setId: number, newSet: Set,exercideId: number): Observable<Set> {
     return this.http.post<Set>(`${this.apiUrl}/set/${setId}/${exercideId}`, newSet);
   }
   public updateSet(updatedSet: Set): Observable<Set> { 

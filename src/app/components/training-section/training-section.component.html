@@ -3,7 +3,7 @@
   <div class = "individual-training-container">
   <h3 (click)="toggleDetails(training.id)" [class.highlighted]="showDetails">
         <mat-icon>date_range</mat-icon>
-        {{ training?.trainingDate | date:'yyyy-MM-dd HH:mm' }}
+        {{ training?.trainingDate | date:'yyyy-MM-dd' }}
         
     </h3>
     <mat-icon class="delete-icon" (click) ="deleteTraining(training.id)">delete</mat-icon>

@@ -17,6 +17,7 @@ export class TrainingsComponent {
   constructor(
     private userService: UserService,
     private authService: AuthService,
+    private router : Router,
 
   ) {}
 
@@ -28,12 +29,14 @@ export class TrainingsComponent {
   training : Training = {
     id: 0,
     trainingDate: new Date(),
+    name : '',
 
   }
 
   // Get trainings
   ngOnInit() {
     this.getTrainings();
+
   }
   selectDate(dateObject) {
     this.dateSelected = true
@@ -52,14 +55,17 @@ export class TrainingsComponent {
       this.userService.createTraining(this.activeUser.id, this.training).subscribe(
         (data: Training) => {
           this.trainings.push(data);
-          this.getTrainings(); // Move the getTrainings call here
+          this.getTrainings(); 
         },
         (error) => {
           console.error('Wystąpił błąd podczas dodawania treningu:', error);
         }
       );
-      // Remove this.getTrainings(); from here
+     
       console.log(this.trainings);
+      }
+      addTemplate() {
+        this.router.navigate(['/templates']);
       }
     
     
@@ -68,7 +74,7 @@ export class TrainingsComponent {
   getTrainings() {
     this.userService.getTrainings(this.activeUser.id).subscribe(
       (data: Training[]) => {
-        this.trainings = data; // Assign the retrieved data to this.trainings
+        this.trainings = data; 
       },
       (error) => {
         console.error('Wystąpił błąd podczas pobierania treningów:', error);

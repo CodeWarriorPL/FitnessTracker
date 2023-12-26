@@ -7,5 +7,7 @@ export class Training {
 
     sets? : Set[]
 
+    name: string
+
     
 }

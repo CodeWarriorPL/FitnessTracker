@@ -4,6 +4,7 @@
     <mat-select (selectionChange)="selectTemplate()">
       <mat-option value="option">Option</mat-option>
     </mat-select>
+    
   </mat-form-field>
   
   <mat-form-field>
@@ -14,9 +15,10 @@
   </mat-form-field>
   
 
-  <!-- Dodaj przycisk na prawo od form fieldów -->
+  <button mat-button class="custom-button" (click)="addTemplate()">Dodaj templatkę</button>
  <button mat-button class="custom-button" (click)="addTraining()" *ngIf="dateSelected && templateSelected">Dodaj trening</button>
 
+ 
 
 </div>
 

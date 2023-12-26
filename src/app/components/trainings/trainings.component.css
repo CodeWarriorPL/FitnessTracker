@@ -34,10 +34,12 @@ div {
   flex-direction: row;
   align-items: center;
   margin-bottom: 20px;
+  
 }
 .custom-button {
   
   margin-top: -20px;
+  margin-right: 20px;
   padding: 8px 16px;
   background-color: #007bff;
   color: #fff;
@@ -45,6 +47,7 @@ div {
   border-radius: 4px;
   cursor: pointer;
 }
+
 
 mat-form-field {
   margin-right: 10px;
@@ -67,6 +70,7 @@ mat-form-field {
   li:nth-child(odd) {
     background-color: #f9f9f9;
   }
+  
   
 
   

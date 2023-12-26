@@ -27,6 +27,7 @@ import { ChooseExerciseComponent } from './components/choose-exercise/choose-exe
 import { ProgressChartComponent } from './components/progress-chart/progress-chart.component';
 import { ChartModule } from 'angular-highcharts'
 import {NgxEchartsModule} from 'ngx-echarts';
+import { TrainingTemplateComponent } from './components/training-template/training-template.component';
 
 
 
@@ -42,6 +43,7 @@ import {NgxEchartsModule} from 'ngx-echarts';
     AddSetComponent,
     ChooseExerciseComponent,
     ProgressChartComponent,
+    TrainingTemplateComponent,
     
     
     
