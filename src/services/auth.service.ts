@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
 import { User } from 'src/models/user';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private isAuthenticated: boolean = false;
+  private isAuthenticated = null
+  private showNavbarSubject = null
+
+
   activeUser: User;
 
   constructor(private router: Router) {
-    // Check for stored authentication state during service initialization
     const storedUser = localStorage.getItem('activeUser');
     if (storedUser) {
       this.isAuthenticated = true;
@@ -21,8 +24,6 @@ export class AuthService {
   login(user: User) {
     this.isAuthenticated = true;
     this.activeUser = user;
-
-    // Store user information in localStorage
     localStorage.setItem('activeUser', JSON.stringify(user));
   }
 

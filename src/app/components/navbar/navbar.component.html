@@ -1,7 +1,17 @@
 <nav>
-    <ul>
-      <li (click)="logout()">Wyloguj się</li>
-      <li><a routerLink="/">Home</a></li>
-    </ul>
-  </nav>
-  
+  <ul class="navbar-left">
+    <li><a routerLink="/">Home</a></li>
+  </ul>
+  <ul class="navbar-right">
+    <li class="dropdown" (click)="toggleDropdown()" [class.open]="isDropdownOpen">
+      <div class="profile">
+        <img src="/assets/profile-icon.png" alt="Profil" class="profile-icon"> 
+        <span>{{ activeUser.username }}</span>
+      </div>
+      <ul class="dropdown-menu" *ngIf="isDropdownOpen">
+        <li><a routerLink="/user-profile">Mój profil</a></li>
+        <li (click)="logout()">Wyloguj się</li>
+      </ul>
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,54 @@
+<button class="create-training-btn" (click)="createTrainingForPlan()">+ Dodaj nowy trening</button>
+<button class="create-training-btn" (click)="exportToPDF()">📄 Eksportuj do PDF</button>
+
+<div class="training-container">
+    <div *ngFor="let training of trainings">
+      <div class="training-item">
+        <div class="training-header">
+            <h3 (click)="toggleTraining(training.id)">
+              <span *ngIf="!editingTrainingId || editingTrainingId !== training.id">
+                {{ training.name }}
+              </span>
+              <input *ngIf="editingTrainingId === training.id" [(ngModel)]="editedTrainingName" class="edit-training-input">
+            </h3>
+            <div class="training-actions">
+              <button *ngIf="editingTrainingId !== training.id" class="edit-btn" (click)="editTraining(training)">✏️</button>
+              <button *ngIf="editingTrainingId === training.id" class="save-btn" (click)="saveTrainingName()">💾</button>
+              <button class="delete-btn" (click)="deleteTraining(training.id)">🗑️</button>
+            </div>
+          </div>
+          
+  
+        <div *ngIf="selectedTrainingId === training.id" class="training-details">
+          <!-- Przycisk dodawania ćwiczenia -->
+          <button class="add-btn" (click)="addExercise(training.id)">+ Dodaj ćwiczenie</button>
+  
+          <!-- Lista ćwiczeń -->
+          <div *ngFor="let exerciseName of getExerciseNames(training.id)" class="exercise-container">
+            <div class="exercise-header">
+              <h4>{{ exerciseName }}</h4>
+              <button class="delete-exercise-btn" (click)="deleteExercise(training.id, exerciseName)">🗑️</button>
+            </div>
+  
+            <div class="set-list">
+                <div *ngFor="let set of sets[training.id][exerciseName]" class="set-item">
+                  <div class="input-container">
+                    <label for="reps-{{ set.id }}" class="set-label">Powtórzenia</label>
+                    <input type="number" id="reps-{{ set.id }}" [(ngModel)]="set.repetitions" (change)="updateSet(set)" />
+                  </div>
+                  <div class="input-container">
+                    <label for="weight-{{ set.id }}" class="set-label">Waga</label>
+                    <input type="number" id="weight-{{ set.id }}" [(ngModel)]="set.weight" (change)="updateSet(set)" />
+                  </div>
+                  <button class="delete-btn" (click)="removeSet(set.id, exerciseName)">🗑️</button>
+                </div>
+              </div>
+              
+  
+            <button class="add-set-btn" (click)="addSet(training.id, exerciseName)">+ Dodaj set</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,30 @@
+<div class="training-plans-container">
+  <h2>Twoje plany treningowe</h2>
+
+  <button class="add-training-button" (click)="openModal()">+ Nowy plan treningowy</button>
+
+  <div *ngIf="trainingPlans.length > 0; else noPlans" class="plans-grid">
+    <div *ngFor="let plan of trainingPlans" class="plan-card">
+      <h3>{{ plan.name }}</h3>
+      <button (click)="viewPlanDetails(plan)" class="details-button">Zobacz szczegóły</button>
+      <button (click)="deletePlan(plan.id)" class="delete-button">Usuń plan</button>
+    </div>
+    
+  </div>
+
+  <ng-template #noPlans>
+    <p class="no-plans">Nie masz jeszcze żadnych planów treningowych. Stwórz swój pierwszy plan!</p>
+  </ng-template>
+</div>
+
+<!-- MODAL DO DODAWANIA PLANU -->
+<div *ngIf="showModal" class="modal-overlay">
+  <div class="modal-content">
+    <h3>Nowy plan treningowy</h3>
+    <input [(ngModel)]="newPlanName" placeholder="Podaj nazwę planu" class="input-field" />
+    <div class="modal-buttons">
+      <button class="save-button" (click)="addTrainingPlan()">Zapisz</button>
+      <button class="cancel-button" (click)="closeModal()">Anuluj</button>
+    </div>
+  </div>
+</div>

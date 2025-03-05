@@ -1,0 +1,20 @@
+<div class="dialog-container">
+  <h3>📊 Historia pomiarów:</h3>
+  <ul class="measurements-list">
+    <li *ngFor="let measurement of measurements">
+      <span class="date">
+        <mat-icon class="calendar-icon">calendar_today</mat-icon>
+        {{ measurement.measurementDate | date: 'dd MMMM yyyy' }}
+      </span>
+      <span class="weight">{{ measurement.weight }} kg</span>
+      <button mat-icon-button color="warn" (click)="markForDeletion(measurement.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </li>
+  </ul>
+
+  <div class="dialog-actions">
+    <button mat-button (click)="close()">Anuluj</button>
+    <button mat-raised-button color="primary" (click)="save()">Zapisz</button>
+  </div>
+</div>

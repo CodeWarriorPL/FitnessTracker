@@ -22,7 +22,6 @@ export class AddSetComponent {
   }
 
   onAddSet() {
-    // Emit the entered values and exerciseId back to the calling component
     this.dialogRef.close({
       
       weight: this.weight,
@@ -31,7 +30,6 @@ export class AddSetComponent {
   }
 
   onClose() {
-    // Close the dialog without emitting any values
     this.dialogRef.close();
   }
 }

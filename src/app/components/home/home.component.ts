@@ -17,7 +17,7 @@ export class HomeComponent {
 
   
     activeUser = this.authService.activeUser;
-    selectedFeature: string = ''; // Track the selected feature
+    selectedFeature: string = ''; 
 
 
     changeContent(featureName: string): void {

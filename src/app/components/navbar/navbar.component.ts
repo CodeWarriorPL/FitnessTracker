@@ -10,6 +10,12 @@ import { AuthService } from 'src/services/auth.service';
 })
 export class NavbarComponent {
   constructor(private authService : AuthService, private router : Router) { }
+  activeUser = this.authService.activeUser;
+  isDropdownOpen = false;
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
   logout() {
     this.authService.logout();
   }

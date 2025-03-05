@@ -1,0 +1,68 @@
+<div class="back-button-container">
+    <button class="back-button" (click)="goBack()">⬅ Wróć</button>
+</div>
+
+<div class="training-name-container">
+    <input 
+        type="text" 
+        [(ngModel)]="trainingName" 
+        placeholder="Wpisz nazwę treningu..." 
+        (change)="updateTrainingName()"
+        class="training-name-input"
+    />
+    <p *ngIf="!trainingName" class="training-name-placeholder">Brak nazwy treningu. Wpisz nazwę powyżej.</p>
+</div>
+
+<div class="training-layout">
+    <!-- Lista ćwiczeń -->
+    <div class="trainings-container">
+        <button class="add-exercise-btn" (click)="openExerciseDialog()">➕ Dodaj ćwiczenie</button>
+        <div *ngFor="let exercise of sets | keyvalue" class="training-card">
+            <ng-container *ngIf="exercise.key !== 'string'">
+                <div class="exercise-header">
+                    <h3 class="exercise-name">{{ exercise.key}}</h3>
+                    <div class="exercise-actions">
+                        <button class="add-btn" (click)="addSet(exercise.key)">➕</button>
+                        <button class="delete-btn" (click)="deleteExercise(exercise.key)">🗑</button>
+                    </div>
+                </div>
+                <div class="sets-table">
+                    <ng-container *ngIf="exercise.value && exercise.value.length > 0; else noSets">
+                        <div *ngFor="let set of exercise.value" class="set-item">
+                            <span class="set-icon">🏋️</span>
+                            <input type="number" [(ngModel)]="set.repetitions" min="1" (change)="updateSet(set.id,set.repetitions,set.weight,set.exerciseId)" class="set-input">
+                            <span class="set-label">powt.</span>
+                            <input type="number" [(ngModel)]="set.weight" min="0" step="0.5"(change)="updateSet(set.id,set.repetitions,set.weight,set.exerciseId)" class="set-input">
+                            <span class="set-label">kg</span>
+                            <button class="delete-btn" (click)="deleteSet(set.id, exercise.key)">🗑</button>
+                        </div>
+                    </ng-container>
+                    <ng-template #noSets>
+                        <p class="no-sets-message">Brak zapisanych setów dla tego ćwiczenia.</p>
+                    </ng-template>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="charts-container">
+        <div class="chart">
+            <h3>Podział serii według ćwiczeń</h3>
+            <apx-chart 
+            [series]="chartOptionsSets.series" 
+            [chart]="chartOptionsSets.chart"
+            [labels]="chartOptionsSets.labels"
+            [responsive]="chartOptionsSets.responsive">
+            </apx-chart>
+        </div>
+    
+        <div class="chart">
+            <h3>Podział procentowy partii ciała</h3>
+            <apx-chart 
+            [series]="chartOptionsBodyParts.series" 
+            [chart]="chartOptionsBodyParts.chart"
+            [labels]="chartOptionsBodyParts.labels"
+            [responsive]="chartOptionsBodyParts.responsive">
+            </apx-chart>
+        </div>
+    </div>
+</div>

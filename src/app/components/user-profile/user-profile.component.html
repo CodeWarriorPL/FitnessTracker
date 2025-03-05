@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="left-section">
+    <h2>Witaj, {{ activeUser.username }}</h2>
+    <button routerLink="/my-trainings">Moje treningi</button>
+    <button routerLink="/progress">Moje postępy</button>
+    
+    <div class="weight-section">
+      <label for="weightInput">Twoja waga na dzisiaj (kg):</label>
+      <div class="weight-input">
+        <input type="number" id="weightInput" [(ngModel)]="userWeight" placeholder="Podaj wagę">
+        <button class="weight-input-button" (click)="saveWeight()">Zapisz</button>
+      </div>
+      <a class="edit-weight" (click)="editWeight()">Edytuj wagi</a>
+    </div>
+
+    <!-- Wykres wagi -->
+    <div class="chart-container">
+      <apx-chart 
+        [series]="chartOptions.series" 
+        [chart]="chartOptions.chart"
+        [xaxis]="chartOptions.xaxis">
+      </apx-chart>
+    </div>
+  </div>
+
+  <div class="right-section">
+    <div class="calendar-container">
+      <mat-card class="demo-inline-calendar-card">
+        <mat-calendar [dateClass]="dateClass"></mat-calendar>
+        <div class="calendar-legend">
+          <div class="legend-item">
+            <span class="legend-color completed"></span> Trening wykonany
+          </div>
+          <div class="legend-item">
+            <span class="legend-color upcoming"></span> Planowany trening
+          </div>
+          <div class="legend-item">
+            <span class="legend-color no-training"></span> Brak treningu
+          </div>
+        </div>
+      </mat-card>
+      
+      <div class="workout-summary">
+        <h2>Gratulacje!</h2>
+        <p>W tym miesiącu zrobiłeś trening {{ trainingCount$ | async }} razy.</p>
+        <button (click)="onClick('Zaplanuj trening')">Zaplanuj trening</button>
+      </div>
+    </div>
+  </div>
+</div>

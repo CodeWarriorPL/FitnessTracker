@@ -1,0 +1,19 @@
+<div class="container">
+    <h2>Twoje postępy</h2>
+  
+    <!-- Dropdown do wyboru ćwiczenia -->
+    <label for="exerciseSelect">Wybierz ćwiczenie:</label>
+    <select id="exerciseSelect" [(ngModel)]="selectedExercise" (change)="onExerciseChange()">
+      <option *ngFor="let exercise of exercises" [value]="exercise.ExerciseName">
+        {{ exercise.exerciseName }}
+      </option>
+    </select>
+  
+    <!-- Wykres ApexCharts -->
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis">
+    </apx-chart>
+  </div>
+  `

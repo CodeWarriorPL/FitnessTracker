@@ -1,0 +1,92 @@
+/* Kontener dialogu */
+.dialog-container {
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+}
+
+/* Nagłówek */
+h3 {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+/* Lista pomiarów */
+.measurements-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.measurements-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+/* Data i waga */
+.date {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.calendar-icon {
+  margin-right: 8px;
+  color: #1976d2;
+}
+
+/* Styl dla wagi */
+/* Styl dla wagi */
+.weight {
+  font-size: 16px;
+  color: #333;
+  margin-left: auto;
+  margin-right: 16px; /* Większa przerwa między wagą a ikoną kosza */
+}
+
+
+/* Przycisk usuwania */
+.delete-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background 0.2s ease-in-out;
+}
+
+.delete-button:hover {
+  background: rgba(255, 0, 0, 0.1);
+}
+
+/* Kontener przycisków akcji */
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* Przycisk anuluj */
+button[mat-button] {
+  min-width: 90px;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+button[mat-button]:hover {
+  background-color: #0056b3;
+}

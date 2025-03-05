@@ -25,10 +25,18 @@ import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { ChooseExerciseComponent } from './components/choose-exercise/choose-exercise.component';
 import { ProgressChartComponent } from './components/progress-chart/progress-chart.component';
-import { ChartModule } from 'angular-highcharts'
 import {NgxEchartsModule} from 'ngx-echarts';
 import { TrainingTemplateComponent } from './components/training-template/training-template.component';
-
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatCardModule} from '@angular/material/card';
+import { NgApexchartsModule } from "ng-apexcharts";
+import { EditWeightDialogComponent } from './components/edit-weight-dialog/edit-weight-dialog.component';
+import { MyTrainingsComponent } from './components/my-trainings/my-trainings.component';
+import { TrainingPlansComponent } from './components/training-plans/training-plans.component';
+import { IndividualTrainingComponent } from './components/individual-training/individual-training.component';
+import { IndividualPlanComponent } from './components/individual-plan/individual-plan.component';
+import { TrainingProgressComponent } from './components/training-progress/training-progress.component';
 
 
 @NgModule({
@@ -44,6 +52,14 @@ import { TrainingTemplateComponent } from './components/training-template/traini
     ChooseExerciseComponent,
     ProgressChartComponent,
     TrainingTemplateComponent,
+    UserProfileComponent,
+    EditWeightDialogComponent,
+    MyTrainingsComponent,
+    TrainingPlansComponent,
+    IndividualTrainingComponent,
+    IndividualPlanComponent,
+    TrainingProgressComponent,
+   
     
     
     
@@ -63,7 +79,9 @@ import { TrainingTemplateComponent } from './components/training-template/traini
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    ChartModule,
+    ReactiveFormsModule,
+    NgApexchartsModule,
+    MatCardModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     })

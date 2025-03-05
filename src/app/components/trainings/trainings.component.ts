@@ -30,6 +30,7 @@ export class TrainingsComponent {
     id: 0,
     trainingDate: new Date(),
     name : '',
+    isTrainingPlan: false,
 
   }
 

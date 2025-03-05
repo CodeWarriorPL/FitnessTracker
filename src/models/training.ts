@@ -1,13 +1,17 @@
-import { User } from "./user";
-import { Set } from "./set";
-export class Training {
-    id? : number
-    
-    trainingDate? : Date
+    import { User } from "./user";
+    import { Set } from "./set";
+    export class Training {
+        id? : number
+        
+        trainingDate? : Date
 
-    sets? : Set[]
+        sets? : Set[]
 
-    name: string
+        name: string
 
-    
-}
+        isTrainingPlan?: boolean 
+
+        trainingPlanId?: number;
+
+        
+    }

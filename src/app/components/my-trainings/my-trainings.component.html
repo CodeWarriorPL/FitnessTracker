@@ -1,0 +1,50 @@
+<div class="trainings-container">
+  <h2>Moje treningi</h2>
+
+  <div class="buttons-container">
+    <button class="plans-button" routerLink="/training-plans">Moje plany treningowe</button>
+    <button class="add-training-button" (click)="openAddTrainingModal()">Dodaj trening</button>
+  </div>
+  
+
+  <!-- Modal do dodawania treningu -->
+  <div *ngIf="isModalOpen" class="modal">
+    <div class="modal-content">
+      <h3>Dodaj nowy trening</h3>
+
+      <label for="trainingName">Nazwa treningu:</label>
+      <input type="text" id="trainingName" [(ngModel)]="newTraining.name">
+
+      <label for="trainingDate">Data treningu:</label>
+      <input type="date" id="trainingDate" [(ngModel)]="newTraining.trainingDate">
+
+      <label for="trainingPlan">Wybierz plan treningowy:</label>
+      <select id="trainingPlan" [(ngModel)]="selectedTrainingPlan" (change)="loadPlanTrainings()">
+        <option *ngFor="let plan of trainingPlans" [value]="plan.id">{{ plan.name }}</option>
+      </select>
+
+      <label for="planTraining">Wybierz trening z planu:</label>
+      <select id="planTraining" [(ngModel)]="selectedPlanTraining">
+        <option *ngFor="let training of planTrainings" [value]="training.id">{{ training.name }}</option>
+      </select>
+
+      <div class="modal-buttons">
+        <button (click)="addTraining()">Zapisz</button>
+        <button class="cancel-button" (click)="closeAddTrainingModal()">Anuluj</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="trainings.length > 0; else noTrainings">
+    <div *ngFor="let training of trainings" class="training-card">
+      <h3>{{ training.name }}</h3>
+      <p>Data: {{ training.trainingDate | date:'shortDate' }}</p>
+      <button (click)="viewDetails(training)">Szczegóły</button>
+      <button (click)="deleteTraining(training.id)" class="delete-button">Usuń</button>
+    </div>
+  </div>
+
+  <ng-template #noTrainings>
+    <p>Nie masz jeszcze żadnych treningów.</p>
+  </ng-template>
+</div>

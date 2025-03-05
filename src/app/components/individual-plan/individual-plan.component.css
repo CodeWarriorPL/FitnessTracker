@@ -1,0 +1,163 @@
+/* Kontener dla całej sekcji treningowej */
+.training-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Pojedynczy trening */
+.training-item {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin: 15px 0;
+    border-left: 5px solid #007bff;
+    transition: transform 0.2s ease-in-out;
+}
+
+.training-item:hover {
+    transform: translateY(-3px);
+}
+
+/* Nagłówki */
+h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    cursor: pointer;
+    color: #007bff;
+}
+
+h3:hover {
+    text-decoration: underline;
+}
+
+/* Szczegóły treningu */
+.training-details {
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* Kontener na ćwiczenia */
+.exercise-container {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    border-left: 4px solid #28a745;
+}
+
+/* Nagłówek ćwiczenia */
+.exercise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 10px;
+  }
+  
+  /* Styl dla etykiety */
+  .set-label {
+    font-size: 14px;
+    color: #007bff;
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  
+  /* Pojedynczy set */
+  .set-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f1f3f5;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-top: 5px;
+    font-size: 16px;
+    gap: 10px;
+  }
+  /* Style dla pól edycji */
+  .set-item input {
+    width: 60px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 16px;
+  }
+  
+  /* Efekt przy focus */
+  .set-item input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+
+/* Przycisk dodawania ćwiczenia */
+.add-btn, .add-set-btn {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.add-btn:hover, .add-set-btn:hover {
+    background: #218838;
+}
+
+/* Przycisk usuwania seta */
+.delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: red;
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+.delete-btn:hover {
+    color: darkred;
+}
+
+/* Przycisk usuwania ćwiczenia */
+.delete-exercise-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: red;
+    font-size: 18px;
+}
+
+.delete-exercise-btn:hover {
+    color: darkred;
+}
+.create-training-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    margin: 10px auto;
+}
+
+.create-training-btn:hover {
+    background: #0056b3;
+}

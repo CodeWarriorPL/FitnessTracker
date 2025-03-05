@@ -1,7 +1,18 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #000000;
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 10px 20px;
+}
+
 nav ul {
   list-style-type: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  display: flex;
 }
 
 nav li {
@@ -10,16 +21,52 @@ nav li {
   cursor: pointer;
 }
 
-
 nav li:hover {
-  background-color: #0575ed /* Change this to the desired highlight color */
-}
-nav{
-  border-bottom: 2px solid #000000;
-  background-color: #104b8a;
-  color: #ffffff;
+  background-color: #3e95f3;
 }
 a {
-  text-decoration: none; /* Usunięcie domyślnego podkreślenia */
-  color: #ffffff; /* Zmiana koloru tekstu na dowolny inny niż niebieski */
+  text-decoration: none;
+  color: #000000;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-left {
+  display: flex;
+  gap: 15px;
+}
+
+.navbar-right {
+  margin-left: auto;
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-width: 150px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
