@@ -8,13 +8,9 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { FormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { TrainingsComponent } from './components/trainings/trainings.component';
 import { DatePipe } from '@angular/common';
-import { TrainingSectionComponent } from './components/training-section/training-section.component';
 import {MatIconModule} from '@angular/material/icon';
-import { AddSetComponent } from './components/add-set/add-set.component'
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCalendar, MatDatepickerModule} from '@angular/material/datepicker';
 import { DateAdapter, MatOptionModule } from '@angular/material/core';
@@ -24,9 +20,7 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { ChooseExerciseComponent } from './components/choose-exercise/choose-exercise.component';
-import { ProgressChartComponent } from './components/progress-chart/progress-chart.component';
 import {NgxEchartsModule} from 'ngx-echarts';
-import { TrainingTemplateComponent } from './components/training-template/training-template.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
@@ -37,6 +31,7 @@ import { TrainingPlansComponent } from './components/training-plans/training-pla
 import { IndividualTrainingComponent } from './components/individual-training/individual-training.component';
 import { IndividualPlanComponent } from './components/individual-plan/individual-plan.component';
 import { TrainingProgressComponent } from './components/training-progress/training-progress.component';
+import { NgSelectModule } from '@ng-select/ng-select'; // Import NgSelectModule
 
 
 @NgModule({
@@ -44,14 +39,8 @@ import { TrainingProgressComponent } from './components/training-progress/traini
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent,
     NavbarComponent,
-    TrainingsComponent,
-    TrainingSectionComponent,
-    AddSetComponent,
     ChooseExerciseComponent,
-    ProgressChartComponent,
-    TrainingTemplateComponent,
     UserProfileComponent,
     EditWeightDialogComponent,
     MyTrainingsComponent,
@@ -81,6 +70,7 @@ import { TrainingProgressComponent } from './components/training-progress/traini
     MatSelectModule,
     ReactiveFormsModule,
     NgApexchartsModule,
+    NgSelectModule,
     MatCardModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')

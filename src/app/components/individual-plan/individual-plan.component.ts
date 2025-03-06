@@ -12,6 +12,7 @@
   import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import autoTable from 'jspdf-autotable';
+import {Roboto} from 'src/assets/Roboto';
 
   @Component({
     selector: 'app-individual-plan',
@@ -264,23 +265,92 @@ import autoTable from 'jspdf-autotable';
     }
     exportToPDF(): void {
       const doc = new jsPDF();
-      const columns = ['Trening', 'Cwiczenie', 'Waga', 'Powtórzenia'];
+    
+      // Dodaj czcionkę do jsPDF
+      doc.addFileToVFS('Roboto_Condensed-BlackItalic.ttf', Roboto);
+      doc.addFont('Roboto_Condensed-BlackItalic.ttf', 'Roboto_Condensed', 'bolditalic');
+      doc.setFont('Roboto_Condensed', 'bolditalic');
+    
+      const columns = ['Trening', 'Ćwiczenie', 'Waga', 'Powtórzenia'];
       const data: any[] = [];
     
-      this.trainings.forEach(training => {
+      this.trainings.forEach((training, index) => {
+        // Dodaj dane dla każdego treningu
         Object.entries(this.sets[training.id] || {}).forEach(([exerciseName, sets]: [string, Set[]]) => {
           sets.forEach(set => {
             data.push([
-              training.name,
-              exerciseName,
-              set.weight + ' kg',
-              set.repetitions
+              training.name, // Nazwa treningu
+              exerciseName,  // Nazwa ćwiczenia
+              set.weight + ' kg', // Waga
+              set.repetitions // Powtórzenia
             ]);
           });
         });
+    
+        // Dodaj nagłówek jako separator po każdym treningu (oprócz ostatniego)
+        if (index < this.trainings.length - 1) {
+          data.push(columns); // Dodaj nagłówek jako separator
+        }
       });
     
-      autoTable(doc, { head: [columns], body: data });
+      // Ustaw czcionkę w autoTable
+      autoTable(doc, {
+        head: [columns], // Nagłówek dla pierwszej tabeli
+        body: data,
+        styles: {
+          font: 'Roboto_Condensed', // Użyj zarejestrowanej czcionki
+          fontStyle: 'bolditalic',   // Użyj zarejestrowanego stylu
+          textColor: [0, 0, 0], // Kolor tekstu
+          fillColor: [255, 255, 255], // Kolor tła
+          halign: 'left', // Wyrównanie poziome
+          valign: 'middle', // Wyrównanie pionowe
+          fontSize: 10, // Rozmiar czcionki
+          cellPadding: 5, // Wewnętrzny padding komórek
+          lineWidth: 0.1, // Grubość linii
+          lineColor: [0, 0, 0], // Kolor linii
+          overflow: 'linebreak', // Domyślne zachowanie dla długiego tekstu
+          cellWidth: 'auto', // Szerokość komórki
+          minCellHeight: 10, // Minimalna wysokość komórki
+          minCellWidth: 10, // Minimalna szerokość komórki
+        },
+        headStyles: {
+          font: 'Roboto_Condensed', // Czcionka dla nagłówka
+          fontStyle: 'bolditalic',  // Styl czcionki dla nagłówka
+          fillColor: [220, 220, 220], // Kolor tła dla nagłówka
+          textColor: [0, 0, 0], // Kolor tekstu dla nagłówka
+          halign: 'center', // Wyrównanie poziome
+          valign: 'middle', // Wyrównanie pionowe
+          fontSize: 12, // Rozmiar czcionki
+          cellPadding: 5, // Wewnętrzny padding komórek
+          lineWidth: 0.1, // Grubość linii
+          lineColor: [0, 0, 0], // Kolor linii
+          overflow: 'linebreak', // Domyślne zachowanie dla długiego tekstu
+          cellWidth: 'auto', // Szerokość komórki
+          minCellHeight: 10, // Minimalna wysokość komórki
+          minCellWidth: 10, // Minimalna szerokość komórki
+        },
+        didParseCell: (data) => {
+          if (data.row.raw === columns) { // Jeśli wiersz to nagłówek (separator)
+            data.cell.styles = {
+              font: 'Roboto_Condensed', // Użyj tej samej czcionki
+              fontStyle: 'bolditalic', // Użyj tego samego stylu
+              fillColor: [220, 220, 220], // Kolor tła dla separatora
+              textColor: [0, 0, 0], // Kolor tekstu
+              halign: 'center', // Wyrównanie poziome
+              valign: 'middle', // Wyrównanie pionowe
+              fontSize: 12, // Rozmiar czcionki
+              cellPadding: 5, // Wewnętrzny padding komórek
+              lineWidth: 0.1, // Grubość linii
+              lineColor: [0, 0, 0], // Kolor linii
+              overflow: 'linebreak', // Domyślne zachowanie dla długiego tekstu
+              cellWidth: 'auto', // Szerokość komórki
+              minCellHeight: 10, // Minimalna wysokość komórki
+              minCellWidth: 10, // Minimalna szerokość komórki
+            };
+          }
+        }
+      });
+    
       doc.save('trening.pdf');
     }
 

@@ -67,6 +67,10 @@
       );
     }
 
+    public getOneRepMaxHistory(userId: number, exerciseName): Observable<Object[]> {
+      return this.http.get<Object[]>(`${this.apiUrl}/User/one-rep-max-history?userId=${userId}&exerciseName=${exerciseName}`);
+    }
+
     //TRAINING FUNCTIONS
 
 

@@ -1,19 +1,26 @@
 <div class="container">
-    <h2>Twoje postępy</h2>
-  
-    <!-- Dropdown do wyboru ćwiczenia -->
-    <label for="exerciseSelect">Wybierz ćwiczenie:</label>
-    <select id="exerciseSelect" [(ngModel)]="selectedExercise" (change)="onExerciseChange()">
-      <option *ngFor="let exercise of exercises" [value]="exercise.ExerciseName">
-        {{ exercise.exerciseName }}
-      </option>
-    </select>
-  
-    <!-- Wykres ApexCharts -->
-    <apx-chart
-      [series]="chartOptions.series"
-      [chart]="chartOptions.chart"
-      [xaxis]="chartOptions.xaxis">
-    </apx-chart>
-  </div>
-  `
+  <h2>Twoje postępy</h2>
+
+  <button (click)="goBack()" class="back-button">Powrót</button>
+
+  <!-- Nowe rozwijane pole z wyszukiwaniem -->
+  <label for="exerciseSelect" class="select-label">Wybierz ćwiczenie:</label>
+  <ng-select
+    [items]="exercises"
+    bindLabel="exerciseName"
+    bindValue="exerciseName"
+    [(ngModel)]="selectedExercise"
+    (change)="onExerciseChange()"
+    placeholder="Wyszukaj lub wybierz ćwiczenie..."
+    [searchable]="true"
+    class="exercise-select">
+  </ng-select>
+</div>
+
+<div class="chart-container">
+  <apx-chart
+    [series]="chartOptions.series"
+    [chart]="chartOptions.chart"
+    [xaxis]="chartOptions.xaxis">
+  </apx-chart>
+</div>

@@ -44,7 +44,7 @@ export class LoginComponent {
             if (response.password === this.userData.password) {
               
               this.authService.login(response);
-              this.router.navigate(['/home']);
+              this.router.navigate(['/user-profile']);
              
               
             } else {
