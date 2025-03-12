@@ -1,126 +1,122 @@
 .trainings-container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-  }
-  
-  .training-card {
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .training-card h3 {
-    margin: 0;
-    color: #333;
-  }
-  
-  .training-card p {
-    margin: 5px 0;
-  }
-  
-  button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  .plans-button {
-    display: block;
-    margin-bottom: 15px;
-    padding: 10px 15px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .plans-button:hover {
-    background-color: #218838;
-  }
-  .buttons-container {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-  }
-  
-  .plans-button, .add-training-button {
-    padding: 10px 15px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .plans-button {
-    background-color: #28a745;
-    color: white;
-  }
-  
-  .add-training-button {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .plans-button:hover {
-    background-color: #218838;
-  }
-  
-  .add-training-button:hover {
-    background-color: #0056b3;
-  }
-  .delete-button {
-    background-color: #dc3545;
-    margin-left: 10px;
-  }
-  
-  .delete-button:hover {
-    background-color: #c82333;
-  }
-  
-  
-  /* Styl dla tła modala */
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  text-align: center;
+  color: #222;
+}
+
+/* Styl dla przycisków */
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.plans-button, .add-training-button {
+  width: 100%;
+  font-weight: bold;
+  text-align: center;
+}
+
+.plans-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.add-training-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.plans-button:hover {
+  background-color: #218838;
+}
+
+.add-training-button:hover {
+  background-color: #0056b3;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  margin-left: 10px;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+/* Styl dla kart treningowych */
+.training-card {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.training-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.training-card h3 {
+  margin: 0 0 5px;
+  color: #333;
+  font-size: 18px;
+}
+
+.training-card p {
+  margin: 5px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+/* Styl dla modala */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Przyciemnienie tła */
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
-/* Styl dla zawartości modala */
 .modal-content {
   background: white;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 25px;
+  border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  width: 320px;
+  width: 350px;
   text-align: center;
   position: relative;
 }
 
-/* Nagłówek */
-.modal-content h3 {
-  margin-top: 0;
-  font-size: 18px;
-}
-
-/* Styl dla inputów */
+/* Styl dla formularza w modal */
 .modal-content label {
   display: block;
   font-weight: bold;
@@ -128,44 +124,34 @@
   text-align: left;
 }
 
-.modal-content input {
+.modal-content input, 
+.modal-content select {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 14px;
 }
 
-/* Kontener przycisków */
 .modal-buttons {
   display: flex;
   justify-content: space-between;
   margin-top: 15px;
 }
 
-/* Styl dla przycisków */
 .modal-buttons button {
   flex: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  padding: 12px;
   font-size: 14px;
 }
 
-/* Zapisz */
 .modal-buttons button:first-child {
   background: #007bff;
   color: white;
   margin-right: 10px;
 }
 
-/* Anuluj */
 .cancel-button {
   background: #dc3545;
   color: white;
-}
-
-/* Efekt hover */
-.modal-buttons button:hover {
-  opacity: 0.8;
 }

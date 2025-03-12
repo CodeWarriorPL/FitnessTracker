@@ -9,57 +9,60 @@ import { User } from 'src/models/user';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-
+  // Injecting necessary services for user registration and routing
   constructor(private userService: UserService, private router: Router) {}
 
-  isEmailUnique : boolean;
-
-  userData: User = {
+  isEmailUnique: boolean = true;  // Flag to indicate if email is unique
+  errorMessage: string = '';  // For displaying error messages
+  
+  userData: any = {
+    id: 0,
     username: '',
     email: '',
     password: '',
   };
-  
-
 
   // Regular expression for email validation
   emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
+  // Method to handle form submission
   onSubmit(): void {
-    // Check if the email is valid before submitting
+    console.log('Registering user:', this.userData);
+    // Validate email format
     if (this.isValidEmail(this.userData.email)) {
-      // Check if the password meets the criteria
+      console.log('Email is valid');
+      // Validate password format
       if (this.isPasswordValid(this.userData.password)) {
-        // Check if the email is not already in the database
+        console.log('Password is valid');
+        // Check if the email is unique
         this.userService.checkEmailUnique(this.userData.email).subscribe(
           (isUnique: boolean) => {
             if (isUnique) {
-              // Add user to the database if email is unique
-              this.userService.addUser(this.userData).subscribe(
-                (response: User) => {
-                  this.router.navigate(['/login']);
-                  
+              // Proceed to register the user if the email is unique
+              this.userService.register(this.userData).subscribe(
+                (response) => {
+                  console.log('Registration successful:', response);
+                  this.router.navigate(['/login']); // Navigate to login after successful registration
                 },
                 (error) => {
-                  console.error('Error adding user:', error);
+                  this.errorMessage = 'Error during registration. Please try again.';
+                  console.error('Error during registration:', error);
                 }
               );
             } else {
-              console.error('Email is already in use');
-              // You can display a message to the user or handle it as needed
+              this.errorMessage = 'Email is already in use.';
             }
           },
           (error) => {
+            this.errorMessage = 'Error checking email uniqueness. Please try again.';
             console.error('Error checking email uniqueness:', error);
           }
         );
       } else {
-        console.error('Invalid password format');
-        // You can display a message to the user or handle it as needed
+        this.errorMessage = 'Password must be at least 6 characters long and contain at least one digit.';
       }
     } else {
-      console.error('Invalid email format');
-      // You can display a message to the user or handle it as needed
+      this.errorMessage = 'Invalid email format.';
     }
   }
 

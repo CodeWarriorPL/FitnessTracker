@@ -11,6 +11,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditWeightDialogComponent } from '../edit-weight-dialog/edit-weight-dialog.component'; 
 import { UserMeasurement } from 'src/models/userMeasurement'; 
 import { startOfMonth } from 'date-fns';
+import { TrainingPlan } from 'src/models/trainingPlan';
+import { Set } from 'src/models/set';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -33,6 +35,14 @@ export class UserProfileComponent implements OnInit {
 
   currentMonthTrainings$: Observable<Date[]>;
   trainingCount$: Observable<number>;
+
+  trainings: Training[] = [];
+  isModalOpen = false;
+    newTraining = { name: '', trainingDate: '', sets: [] as Set[] };
+    trainingPlans: TrainingPlan[] = [];
+    planTrainings: Training[] = [];
+    selectedTrainingPlan: number | null = null;
+    selectedPlanTraining: number | null = null;
 
   chartOptions: {
     series: ApexAxisChartSeries;
@@ -73,6 +83,19 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     if (this.activeUser) {
+      this.userService.getTrainingPlansByUserId(this.activeUser.id  ).subscribe((trainingPlans: TrainingPlan[]) => {
+        this.trainingPlans = trainingPlans;
+        console.log(this.trainingPlans);
+      });
+      this.userService.getTrainings(this.activeUser.id).subscribe((trainings: Training[]) => {
+        this.trainings = trainings
+          .filter(training => training.trainingPlanId === null)
+          .map(training => ({
+            ...training,
+            name: training.name || 'Brak nazwy',
+            trainingDate: training.trainingDate ? new Date(training.trainingDate) : null
+          }));
+      });
       this.userService.getTrainings(this.activeUser.id).pipe(
         map((trainings: Training[]) => trainings.map(training => new Date(training.trainingDate)))
       ).subscribe(dates => {
@@ -103,7 +126,8 @@ export class UserProfileComponent implements OnInit {
         series: [
           {
             name: "Waga (kg)",
-            data: this.userMeasurements.map(m => m.weight)
+            data: this.userMeasurements.map(m => m.weight),
+            type: this.userMeasurements.length > 1 ? 'line' : 'scatter', // Zmieniamy na 'scatter' jeśli mamy tylko jeden punkt
           }
         ],
         xaxis: {
@@ -112,6 +136,7 @@ export class UserProfileComponent implements OnInit {
       };
     }, 200);
   }
+  
   
 
   saveWeight() {
@@ -141,14 +166,12 @@ export class UserProfileComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.userMeasurements = result.updatedMeasurements ?? this.userMeasurements;
-          
-          // Usuwanie pomiarów
+      
           if (result.deletedMeasurements?.length) {
             const deleteRequests = result.deletedMeasurements.map(measurementId =>
               this.userService.deleteUserMeasurement(measurementId)
             );
   
-            // Poczekaj, aż wszystkie usunięcia się wykonają, a potem odśwież wykres
             Promise.all(deleteRequests.map(req => req.toPromise())).then(() => {
               this.userService.getUserMeasurements(this.activeUser.id).subscribe(updatedMeasurements => {
                 this.userMeasurements = updatedMeasurements;
@@ -156,13 +179,112 @@ export class UserProfileComponent implements OnInit {
               });
             });
           } else {
-            // Jeśli nic nie usunięto, po prostu odśwież wykres
             this.updateChartData();
+            
           }
         }
       });
     });
   }
+
+  onDateClick(date: Date) {
+    // Przekazujemy obiekt Date bez formatowania
+    console.log('Data:', date);
+  
+    this.userService.getTrainingByDate(this.activeUser.id, date).subscribe(training => {
+      if (training) {
+        // Jeśli trening istnieje na tej dacie, przejdź do szczegółów treningu
+        console.log('Znaleziono trening:', training);
+        this.router.navigate(['/individual-training', training.id]); // Przekierowanie do szczegółów treningu
+      } else {
+        console.log('Brak treningu w wybranym dniu.');
+      }
+    });
+  }
+  loadPlanTrainings() {
+    if (this.selectedTrainingPlan) {
+      this.userService.getAllPlanTrainigs(this.selectedTrainingPlan).subscribe((trainings: Training[]) => {
+        this.planTrainings = trainings;
+      });
+    } else {
+      this.planTrainings = [];
+    }
+  }
+
+  loadSetsFromPlanTraining() {
+    if (this.selectedPlanTraining) {
+      this.userService.getSets(this.selectedPlanTraining).subscribe((sets: Set[]) => {
+        this.newTraining.sets = sets.map(set => ({ ...set, id: 0})); // Kopiowanie bez ID
+        console.log(this.newTraining.sets);
+      });
+    } else {
+      this.newTraining.sets = [];
+      console.log("sss");
+    }
+  }
+
+  openAddTrainingModal() {
+    this.isModalOpen = true;
+    console.log(this.trainingPlans);
+  }
+
+  closeAddTrainingModal() {
+    this.isModalOpen = false;
+    this.newTraining = { name: '', trainingDate: '', sets: [] };
+    this.selectedTrainingPlan = null;
+    this.selectedPlanTraining = null;
+    this.planTrainings = [];
+  }
+
+  addTraining() {
+    if (!this.newTraining.name || !this.newTraining.trainingDate) {
+      alert("Proszę podać nazwę i datę treningu.");
+      return;
+    }
+  
+    const userId = this.authService.activeUser?.id;
+    if (!userId) return;
+  
+    // Poczekaj, aż sety się załadują
+    if (this.selectedPlanTraining) {
+      this.userService.getSets(this.selectedPlanTraining).subscribe((sets: Set[]) => {
+        this.newTraining.sets = sets.map(set => ({ ...set, id: 0 }));
+  
+        // Teraz sety są dostępne, więc możemy wysłać trening
+        this.createTraining(userId);
+      });
+    } else {
+      this.createTraining(userId);
+    }
+  }
+  
+createTraining(userId: number) {
+  const trainingData: Training = {
+    name: this.newTraining.name,
+    trainingDate: new Date(this.newTraining.trainingDate),
+    sets: this.newTraining.sets
+  };
+
+  this.userService.createTrainingWithSets(userId, trainingData).subscribe((createdTraining) => {
+    this.trainings.push(createdTraining);
+    console.log('Dodano nowy trening:', createdTraining);
+    
+    // Dodaj nową datę do listy podświetlanych dat
+    const updatedDates = [...this.highlightedDatesSubject.getValue(), new Date(createdTraining.trainingDate)];
+    this.highlightedDatesSubject.next(updatedDates);
+    
+    // Odświeżenie kalendarza
+    setTimeout(() => this.calendar.updateTodaysDate(), 100);
+
+    this.closeAddTrainingModal();
+  });
+}
+
+
+  
+  
+  
+  
   
 
   dateClass: (date: Date) => string = (date: Date) => {

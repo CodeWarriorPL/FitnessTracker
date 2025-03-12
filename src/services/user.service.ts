@@ -71,17 +71,40 @@
       return this.http.get<Object[]>(`${this.apiUrl}/User/one-rep-max-history?userId=${userId}&exerciseName=${exerciseName}`);
     }
 
+    public login(email: string, password: string): Observable<any> {
+      return this.http.post<any>(`${this.apiUrl}/user/login`, { email, password });
+    }
+
+    register(user: { email: string, username: string, password: string }): Observable<any> {
+      return this.http.post(`${this.apiUrl}/user/register`, user);
+    }
+
     //TRAINING FUNCTIONS
 
 
     public getTrainings(userId: number): Observable<Training[]> {
       return this.http.get<Training[]>(`${this.apiUrl}/Training/${userId}`);
     }
+    
 
     public getTrainingById(id: number): Observable<Training> {
       return this.http.get<Training>(`${this.apiUrl}/training/byId/${id}`);
     }
-
+    
+    public getTrainingByDate(userId: number, date: Date): Observable<Training | undefined> {
+      return this.getTrainings(userId).pipe(
+        map(trainings => 
+          trainings.find(training => {
+            const trainingDate = new Date(training.trainingDate);
+            return (
+              trainingDate.getFullYear() === date.getFullYear() &&
+              trainingDate.getMonth() === date.getMonth() &&
+              trainingDate.getDate() === date.getDate()
+            );
+          })
+        )
+      );
+    } 
     public createTraining(trainingId: number, newTraining: Training): Observable<Training> {
       return this.http.post<Training>(`${this.apiUrl}/training/${trainingId}`, newTraining);
     }

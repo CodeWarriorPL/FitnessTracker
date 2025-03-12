@@ -13,13 +13,13 @@
     </div>
 
     <!-- Display alert for password and confirm password mismatch -->
-    <div class="alert alert-danger" *ngIf="userData.password !== userData.password && registerForm.submitted">
+    <div class="alert alert-danger" *ngIf="userData.password !== userData.confirmPassword && registerForm.submitted">
       Passwords do not match. Please enter the same password in both fields.
     </div>
 
     <!-- Display alert for existing email -->
-    <div class="alert alert-danger" *ngIf="!isEmailUnique && registerForm.submitted">
-      This email is already in use. Please use a different email.
+    <div class="alert alert-danger" *ngIf="errorMessage && registerForm.submitted">
+      {{ errorMessage }}
     </div>
 
     <div class="form-group">
@@ -30,10 +30,10 @@
     </div>
 
     <div class="form-group">
-      <label for="name">
-        <i class="fa fa-user"></i> Name
+      <label for="username">
+        <i class="fa fa-user"></i> Username
       </label>
-      <input type="name" id="name" name="name" [(ngModel)]="userData.username" required>
+      <input type="text" id="username" name="username" [(ngModel)]="userData.username" required>
     </div>
 
     <div class="form-group">
@@ -47,7 +47,7 @@
       <label for="confirmPassword">
         <i class="fa fa-lock"></i> Confirm Password
       </label>
-      <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="userData.password" required>
+      <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="userData.confirmPassword" required>
     </div>
 
     <button type="submit" [disabled]="registerForm.invalid">Register</button>

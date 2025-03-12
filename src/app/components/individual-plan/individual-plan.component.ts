@@ -112,7 +112,8 @@ import {Roboto} from 'src/assets/Roboto';
     }
     addExercise(trainingId: number): void {
       const dialogRef = this.dialog.open(ChooseExerciseComponent, {
-        width: '400px',
+        width: '400x',
+        height: '600px',
       });
     
       dialogRef.afterClosed().subscribe((selectedExercise) => {

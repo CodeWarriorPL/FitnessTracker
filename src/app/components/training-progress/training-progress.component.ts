@@ -69,8 +69,13 @@ export class TrainingProgressComponent implements OnInit {
     // Jeśli oneRepMaxData jest dostępna, przygotuj dane dla wykresu
     if (this.oneRepMaxData.length) {
       this.oneRepMaxData.forEach((entry: any) => {
-        categories.push(entry.date); // Użyj daty jako kategorii (oś X)
-        oneRepMaxSeries.push(entry.oneRepMax); // Dodaj oneRepMax do serii danych
+        const formattedDate = new Date(entry.date).toLocaleDateString('pl-PL', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        });
+        categories.push(formattedDate); // Dodaj sformatowaną datę
+        oneRepMaxSeries.push(Math.round(entry.oneRepMax)); // Zaokrągl wagi
       });
     }
   
@@ -85,27 +90,27 @@ export class TrainingProgressComponent implements OnInit {
     // Ustaw opcje wykresu
     this.chartOptions = {
       series: [
-        // Dodaj serię dla oneRepMax tylko jeśli dane są dostępne
         ...(this.oneRepMaxData.length
           ? [
               {
                 name: 'Twój najlepszy wynik z danego dnia',
                 data: oneRepMaxSeries,
-                color: '#ff5733', // Kolor dla oneRepMax
+                color: '#ff5733',
+                type: this.oneRepMaxData.length > 1 ? 'line' : 'scatter', // Zmieniamy na 'scatter' jeśli mamy tylko jeden punkt
+                marker: { size: 6 }, // Dodajemy marker, aby wyglądał jak kropka
               },
             ]
           : []),
-        // Dodaj serię dla averageOneRepMax
         {
           name: 'Średni wynik twojej kategorii wagowej',
           data: averageOneRepMaxSeries,
-          color: '#33b5ff', // Kolor dla averageOneRepMax
+          color: '#33b5ff',
           type: 'line',
-          dashArray: 5, // Linia przerywana dla averageOneRepMax
+          dashArray: 5, // Linia przerywana
         },
       ],
       chart: {
-        type: 'line',
+        type: this.oneRepMaxData.length > 1 ? 'line' : 'scatter', // Zmieniamy typ wykresu
         height: 350,
       },
       xaxis: {
@@ -113,7 +118,7 @@ export class TrainingProgressComponent implements OnInit {
       },
     };
   }
-
+  
   
 
   // Navigate back to the previous page

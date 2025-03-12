@@ -1,7 +1,7 @@
 <div class="page-container">
-    <h2>Choose an Exercise</h2>
+    <h2>Wybierz ćwiczenie</h2>
     <div>
-      <label for="bodyPart">Sort by Body Part:</label>
+      <label for="bodyPart">Sortuj partią ciała</label>
       <select id="bodyPart" [(ngModel)]="selectedBodyPart" (change)="sortExercisesByBodyPart(selectedBodyPart)">
         <option value="all">All</option>
         <option *ngFor="let part of bodyParts" [value]="part">{{ part }}</option>

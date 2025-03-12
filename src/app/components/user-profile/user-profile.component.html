@@ -26,7 +26,7 @@
   <div class="right-section">
     <div class="calendar-container">
       <mat-card class="demo-inline-calendar-card">
-        <mat-calendar [dateClass]="dateClass"></mat-calendar>
+        <mat-calendar [dateClass]="dateClass" (selectedChange)="onDateClick($event)"></mat-calendar>
         <div class="calendar-legend">
           <div class="legend-item">
             <span class="legend-color completed"></span> Trening wykonany
@@ -43,8 +43,36 @@
       <div class="workout-summary">
         <h2>Gratulacje!</h2>
         <p>W tym miesiącu zrobiłeś trening {{ trainingCount$ | async }} razy.</p>
-        <button (click)="onClick('Zaplanuj trening')">Zaplanuj trening</button>
+        <button class="add-training-button" (click)="openAddTrainingModal()">Dodaj trening</button>
+        
       </div>
+      <!-- Modal do dodawania treningu -->
+  <div *ngIf="isModalOpen" class="modal">
+    <div class="modal-content">
+      <h3>Dodaj nowy trening</h3>
+
+      <label for="trainingName">Nazwa treningu:</label>
+      <input type="text" id="trainingName" [(ngModel)]="newTraining.name">
+
+      <label for="trainingDate">Data treningu:</label>
+      <input type="date" id="trainingDate" [(ngModel)]="newTraining.trainingDate">
+
+      <label for="trainingPlan">Wybierz plan treningowy:</label>
+      <select id="trainingPlan" [(ngModel)]="selectedTrainingPlan" (change)="loadPlanTrainings()">
+        <option *ngFor="let plan of trainingPlans" [value]="plan.id">{{ plan.name }}</option>
+      </select>
+
+      <label for="planTraining">Wybierz trening z planu:</label>
+      <select id="planTraining" [(ngModel)]="selectedPlanTraining">
+        <option *ngFor="let training of planTrainings" [value]="training.id">{{ training.name }}</option>
+      </select>
+
+      <div class="modal-buttons">
+        <button (click)="addTraining()">Zapisz</button>
+        <button class="cancel-button" (click)="closeAddTrainingModal()">Anuluj</button>
+      </div>
+    </div>
+  </div>
     </div>
   </div>
 </div>

@@ -1,128 +1,248 @@
-.search-input {
-  width: 80%;
-  padding: 10px;
-  margin-bottom: 20px;
-  font-size: 16px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
+/* Kontener główny */
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  text-align: center;
 }
 
-.search-input:focus {
-  outline: none;
-  border-color: #007bff;
+/* Nagłówek */
+h2 {
+  color: #333;
+  font-size: 28px;
+  margin-bottom: 25px;
+  font-weight: bold;
 }
 
-.select-label {
-  font-size: 18px;
-  color: #555;
-  margin-bottom: 8px;
-  display: inline-block;
-}
-
-.exercise-select {
-  width: 60%;
-  padding: 10px;
-  font-size: 16px;
-  margin-bottom: 30px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-  background-color: #fff;
-  cursor: pointer;
-}
-
-.exercise-select:focus {
-  outline: none;
-  border-color: #007bff;
-}
-
-.chart-container {
-  width: 60%;
-  height: calc(100vh - 150px); /* Wykres zajmuje prawie całą wysokość okna */
-  margin-top: 20px;
-}
-
+/* Przycisk Powrót */
 .back-button {
   background-color: #007bff;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
   margin-bottom: 20px;
 }
 
 .back-button:hover {
   background-color: #0056b3;
 }
-.container {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 20px;
-  text-align: center;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-}
 
-h2 {
-  color: #333;
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
+/* Etykieta dla rozwijanego pola */
 .select-label {
   font-size: 18px;
   color: #555;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   display: block;
 }
 
+/* Styl rozwijanego pola select */
 .exercise-select {
   width: 100%;
+  padding: 12px;
   font-size: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
 }
 
+/* Styl focus dla select */
+.exercise-select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Kontener wykresu */
 .chart-container {
+  width: 100%;
   max-width: 800px;
   margin: 20px auto;
-}
-.custom-select {
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  font-size: 16px;
+  height: calc(100vh - 250px); /* Wykres zajmuje większą część okna */
 }
 
-/* Custom styles for ng-select */
+/* Styl ng-select */
 .ng-select {
   width: 100%;
   margin-bottom: 20px;
 }
 
+/* Kontener ng-select */
 .ng-select .ng-select-container {
-  border-radius: 4px;
+  border-radius: 6px;
   border: 1px solid #ddd;
-  padding: 8px;
-  min-height: 40px;
+  padding: 10px;
+  min-height: 45px;
+  transition: border-color 0.3s ease;
 }
 
+/* Dropdown ng-select */
 .ng-select .ng-dropdown-panel {
-  border-radius: 4px;
+  border-radius: 6px;
   border: 1px solid #ddd;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Opcja ng-select */
 .ng-select .ng-option {
-  padding: 8px 10px;
+  padding: 10px 15px;
+  font-size: 16px;
 }
 
+/* Hover dla opcji */
 .ng-select .ng-option:hover {
   background-color: #f5f5f5;
 }
 
+/* Opcja wybrana */
 .ng-select .ng-option.selected {
   background-color: #007bff;
   color: white;
+}
+
+/* Input wyszukiwania */
+.search-input {
+  width: 80%;
+  padding: 12px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+/* Kontener główny */
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* Nagłówek */
+h2 {
+  color: #333;
+  font-size: 28px;
+  margin-bottom: 25px;
+  font-weight: bold;
+}
+
+/* Przycisk Powrót */
+.back-button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+/* Etykieta dla rozwijanego pola */
+.select-label {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* Styl rozwijanego pola select */
+.exercise-select {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  margin-bottom: 30px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+/* Styl focus dla select */
+.exercise-select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Kontener wykresu */
+.chart-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  height: calc(100vh - 250px); /* Wykres zajmuje większą część okna */
+}
+
+/* Styl ng-select */
+.ng-select {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Kontener ng-select */
+.ng-select .ng-select-container {
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  min-height: 45px;
+  transition: border-color 0.3s ease;
+}
+
+/* Dropdown ng-select */
+.ng-select .ng-dropdown-panel {
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Opcja ng-select */
+.ng-select .ng-option {
+  padding: 10px 15px;
+  font-size: 16px;
+}
+
+/* Hover dla opcji */
+.ng-select .ng-option:hover {
+  background-color: #f5f5f5;
+}
+
+/* Opcja wybrana */
+.ng-select .ng-option.selected {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Input wyszukiwania */
+.search-input {
+  width: 80%;
+  padding: 12px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #007bff;
 }
