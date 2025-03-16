@@ -1,10 +1,10 @@
 <div class="register-container">
   <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
-    <h2>Register</h2>
+    <h2>Zarejestruj się</h2>
 
     <!-- Display alert for invalid email format -->
     <div class="alert alert-danger" *ngIf="!isValidEmail(userData.email) && registerForm.submitted">
-      Please enter a valid email address.
+      Proszę wprowadzić poprawne hasło
     </div>
 
     <!-- Display alert for invalid password format -->
@@ -38,14 +38,14 @@
 
     <div class="form-group">
       <label for="password">
-        <i class="fa fa-lock"></i> Password
+        <i class="fa fa-lock"></i> Hasło
       </label>
       <input type="password" id="password" name="password" [(ngModel)]="userData.password" required>
     </div>
 
     <div class="form-group">
       <label for="confirmPassword">
-        <i class="fa fa-lock"></i> Confirm Password
+        <i class="fa fa-lock"></i> Potwierdź hasło
       </label>
       <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="userData.confirmPassword" required>
     </div>

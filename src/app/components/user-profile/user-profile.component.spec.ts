@@ -15,11 +15,11 @@ import { FormsModule } from '@angular/forms';
 describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
   let fixture: ComponentFixture<UserProfileComponent>;
-  let authServiceMock: any;
-  let userServiceMock: any;
-  let routerMock: any;
-  let dialogMock: any;
-
+  let authServiceMock: jasmine.SpyObj<AuthService>;
+  let userServiceMock: jasmine.SpyObj<UserService>;
+  let routerMock: jasmine.SpyObj<Router>;
+  let dialogMock: jasmine.SpyObj<MatDialog>;
+  
   beforeEach(async () => {
     authServiceMock = {
       activeUser: { id: 1, name: 'Test User' }
